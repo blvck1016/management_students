@@ -45,6 +45,7 @@ class TeacherController extends Controller
             'user_id' => $user->id, // Assign the user_id to the created User's id
         ]);
 
+        $teacher->load('department', 'module');
         return $teacher;
     }
 
@@ -83,9 +84,14 @@ class TeacherController extends Controller
 
     public function destroy($id)
     {
-        $u = Teacher::find($id);
-        $u->delete();
-        return ["message" => "Teacher " . $id . " has been deleted successfully"];
+
+        $teacher = Teacher::find($id);
+        $user_id  = $teacher->user_id;
+        $user = User::find($user_id);
+        $teacher->delete();
+        $user->delete();
+
+        return ["message" => "Teacher has been deleted successfully"];
     }
 
 

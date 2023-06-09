@@ -7,7 +7,7 @@ const AdminList = () => {
   useEffect(() => {
     const getAdmin = async () => {
       try {
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/users`);
+        const { data } = await axios.get(`http://127.0.0.1:8000/api/admins`);
         setAdmin(data);
         console.log(data);
       } catch (error) {
@@ -24,7 +24,6 @@ const AdminList = () => {
 
       <div className="grid grid-cols-2 gap-4">
         {admin
-        .filter((e) => e.role_id === 1)
         .map((e) => (
           <div
             key={e.id}

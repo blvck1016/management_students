@@ -23,12 +23,11 @@ const AddEnseignantModal = ({
       department_id: departementId,
     };
     handleAdd(newEnseignant);
-     setShowModal(false);
-     // Reset the form fields
-     setNom("");
-     setEmail("");
-     setmoduleId("");
-     setdepartementId("");
+    setNom("");
+    setEmail("");
+    setmoduleId("");
+    setdepartementId("");
+    setShowModal(false);
   }
 
   return (
