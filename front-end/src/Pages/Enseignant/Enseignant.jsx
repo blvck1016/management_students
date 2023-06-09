@@ -4,18 +4,51 @@ import { Link } from "react-router-dom";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import AddEnseignantModal from "./AddEnseignant";
 
+import Spinner from "../../components/loading/Spinner"
+
 const Enseignant = () => {
   const [enseignants, setEnseignants] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setloading] = useState(true)
+  const [search, setsearch] = useState('')
+  const [modules, setmodules] = useState([])
+  const [Departements, setDepartements] = useState([])
 
   useEffect(() => {
     const getEnseignants = async () => {
       const response = await axios.get("http://127.0.0.1:8000/api/teachers");
       setEnseignants(response.data);
+      setloading(false)
+    };    
+    const getModules = async () => {
+      const {data} = await axios.get("http://127.0.0.1:8000/api/modules");
+      setmodules(data);
+
     };
 
+    const getClasses = async () => {
+      const { data } = await axios.get(
+        "http://127.0.0.1:8000/api/departments"
+      );
+      setDepartements(data);
+ 
+    };
     getEnseignants();
+    getClasses();
+    getModules()
   }, []);
+
+    const handleAdd = async (newEnseignant) => {
+      try {
+          const {data} = await axios.post("http://127.0.0.1:8000/api/teachers", newEnseignant);
+          
+          console.log(data)
+          setEnseignants([...enseignants, newEnseignant]);
+       
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
   const deleteEnseignant = async (enseignantId) => {
     try {
@@ -25,6 +58,8 @@ const Enseignant = () => {
       console.log(error);
     }
   };
+
+  if (loading) return <Spinner />
 
   return (
     <div className="w-full overflow-x-auto">
@@ -38,6 +73,8 @@ const Enseignant = () => {
         <input
           type="text"
           placeholder="Chercher un enseignant..."
+          value={search}
+          onChange={(e) => setsearch(e.target.value)}
           className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
@@ -46,41 +83,50 @@ const Enseignant = () => {
         showModal={showModal}
         setShowModal={setShowModal}
         setEnseignants={setEnseignants}
+        modules={modules}
+        Departements={Departements}
+        handleAdd={handleAdd}
       />
 
-      <table className="min-w-full divide-y divide-gray-200 mt-5">
+      <table className="min-w-full mt-5">
         <thead className="bg-gray-50">
           <tr>
-            <th className="px-4 py-2">id</th>
             <th className="px-4 py-2">Nom</th>
             <th className="px-4 py-2">Email</th>
+            <th className="px-4 py-2">Module</th>
             <th className="px-4 py-2">Departement</th>
             <th className="px-4 py-2">Action</th>
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {enseignants.map((element, index) => (
-            <tr key={index}>
-              <td className="border px-4 py-2">{element.id}</td>
-              <td className="border px-4 py-2">{element.name}</td>
-              <td className="border px-4 py-2">{element.email}</td>
-              <td className="border px-4 py-2">{element.department.name}</td>
+        <tbody className="bg-white">
+          {enseignants
+            ?.filter((e) =>
+              e.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+            )
+            .map((element, index) => (
+              <tr key={index}>
+                <td className="px-4 py-2 text-center">{element.name}</td>
+                <td className="px-4 py-2 text-center">{element.email}</td>
+                <td className="px-4 py-2 text-center">{element.module.name}</td>
+                <td className="px-4 py-2 text-center">
+                  {element.department.name}
+                </td>
 
-              <td className="px-4 py-2 flex items-center gap-2">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  <Link to={`/EditEl/${element.id}`}>
-                    <AiFillEdit className="text-lg cursor-pointer" />
-                  </Link>
-                </button>
-                <button
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2"
-                  onClick={() => deleteEnseignant(element.id)}
-                >
-                  <AiFillDelete className="text-lg cursor-pointer" />
-                </button>
-              </td>
-            </tr>
-          ))}
+                <td className="px-4 py-2 flex justify-center items-center gap-2">
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <Link to={`/EditEl/${element.id}`}>
+                      <AiFillEdit className="text-lg cursor-pointer" />
+                    </Link>
+                  </button>
+                  <button
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2"
+                    onClick={() => deleteEnseignant(element.id)}
+                  >
+                    <AiFillDelete className="text-lg cursor-pointer" />
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

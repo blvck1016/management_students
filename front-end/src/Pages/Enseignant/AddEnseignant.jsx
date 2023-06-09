@@ -1,38 +1,35 @@
-import axios from "axios";
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 
-const AddEnseignantModal = ({ showModal, setShowModal, setEnseignants }) => {
+const AddEnseignantModal = ({
+  showModal,
+  setShowModal,
+  modules,
+  Departements,
+  handleAdd
+}) => {
+
   const [nom, setNom] = useState("");
-  const [prenom, setPrenom] = useState("");
-  const [dateDeNaissance, setDateDeNaissance] = useState("");
-  const [adresse, setAdresse] = useState("");
-  const [telephone, setTelephone] = useState("");
+  const [email, setEmail] = useState("");
+  const [moduleId, setmoduleId] = useState("");
+  const [departementId, setdepartementId] = useState("");
 
-  const addEnseignant = async (e) => {
+  const addEnseignant = (e) =>{
     e.preventDefault();
-
     const newEnseignant = {
-      nom,
-      prenom,
-      date_de_naissance: dateDeNaissance,
-      adresse,
-      telephone,
+      name: nom,
+      email,
+      module_id: moduleId,
+      department_id: departementId,
     };
-
-    try {
-      await axios.post("http://127.0.0.1:8000/api/enseignants", newEnseignant);
-      setEnseignants((prevEnseignants) => [...prevEnseignants, newEnseignant]);
-      setShowModal(false);
-      // Reset the form fields
-      setNom("");
-      setPrenom("");
-      setDateDeNaissance("");
-      setAdresse("");
-      setTelephone("");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    handleAdd(newEnseignant);
+     setShowModal(false);
+     // Reset the form fields
+     setNom("");
+     setEmail("");
+     setmoduleId("");
+     setdepartementId("");
+  }
 
   return (
     <div
@@ -68,66 +65,57 @@ const AddEnseignantModal = ({ showModal, setShowModal, setEnseignants }) => {
                   htmlFor="niveau"
                   className="block text-gray-700 font-medium mb-2"
                 >
-                  Prenom
+                  Email
                 </label>
                 <input
                   type="text"
                   id="prenom"
-                  name="prenom"
-                  value={prenom}
-                  onChange={(event) => setPrenom(event.target.value)}
-                  className="border border-gray-400 py-2 px-3 rounded-lg w-full"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="niveau"
-                  className="block text-gray-700 font-medium mb-2"
-                >
-                  Date de naissance
-                </label>
-                <input
-                  type="date"
-                  id="prenom"
-                  name="prenom"
-                  value={dateDeNaissance}
-                  onChange={(event) => setDateDeNaissance(event.target.value)}
+                  name="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                   className="border border-gray-400 py-2 px-3 rounded-lg w-full"
                 />
               </div>
 
-              <div className="mb-4">
+              <div>
                 <label
-                  htmlFor="niveau"
+                  htmlFor="nom"
                   className="block text-gray-700 font-medium mb-2"
                 >
-                  Address
+                  Departement
                 </label>
-                <input
-                  type="text"
-                  id="prenom"
-                  name="prenom"
-                  value={adresse}
-                  onChange={(event) => setAdresse(event.target.value)}
-                  className="border border-gray-400 py-2 px-3 rounded-lg w-full"
-                />
+                <select
+                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
+                  onChange={(e) => setdepartementId(e.target.value)}
+
+                >
+                  <option value="">Choose departement</option>
+                  {Departements?.map((s) => (
+                    <option key={s.id} value={s.id} className="py-2">
+                      {s.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
-              <div className="mb-4">
+              <div className="my-3">
                 <label
-                  htmlFor="niveau"
+                  htmlFor="nom"
                   className="block text-gray-700 font-medium mb-2"
                 >
-                  Telephone
+                  Module
                 </label>
-                <input
-                  type="text"
-                  id="prenom"
-                  name="prenom"
-                  value={telephone}
-                  onChange={(event) => setTelephone(event.target.value)}
-                  className="border border-gray-400 py-2 px-3 rounded-lg w-full"
-                />
+                <select
+                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
+                  onChange={(e) => setmoduleId(e.target.value)}
+                >
+                  <option value="">Choose module</option>
+                  {modules?.map((s) => (
+                    <option key={s.id} value={s.id} className="py-2">
+                      {s.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="flex justify-end">

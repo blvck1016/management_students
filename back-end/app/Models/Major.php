@@ -14,4 +14,9 @@ class Major extends Model
     {
         return $this->hasMany(Student::class);
     }
+
+    public function semesters()
+    {
+        return $this->hasMany(Semester::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 
@@ -13,30 +14,38 @@ class TeacherController extends Controller
     public function index(Request $request)
     {
 
-        return  Teacher::with('department')->get();
+        return  Teacher::with('department', 'module')->get();
     }
 
 
     public function store(Request $request)
     {
-
-
-        $request->validate([
-            'nom' => 'required',
-            'prenom' => 'required',
-            'date_de_naissance' => 'required',
-            'adresse' => 'required',
-            "telephone" => "required"
+        // Validate the request data
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'module_id' => 'required|exists:modules,id',
+            'department_id' => 'required|exists:departments,id',
         ]);
-        $e = new Teacher();
-        $e->nom = $request->nom;
-        $e->prenom = $request->prenom;
-        $e->date_de_naissance = $request->date_de_naissance;
-        $e->adresse = $request->adresse;
-        $e->telephone = $request->telephone;
-        $e->user_id = $e->id;
-        $e->save();
-        return ["message" => "Teacher has been created succfully"];
+
+        // Create a new User
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt('password'), // Set a default password
+            'role_id' => 2, // Assuming role_id 2 represents the teacher role
+        ]);
+
+        // Create a new Teacher
+        $teacher = Teacher::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'module_id' => $validatedData['module_id'],
+            'department_id' => $validatedData['department_id'],
+            'user_id' => $user->id, // Assign the user_id to the created User's id
+        ]);
+
+        return $teacher;
     }
 
     /**

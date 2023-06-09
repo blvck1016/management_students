@@ -31,7 +31,7 @@ Route::resource('modules', ModuleController::class);
 Route::resource('students', StudentController::class);
 Route::resource('admins', AdminController::class);
 Route::resource('attendance', AttendanceController::class);
-Route::resource('users', UserController::class);
+// Route::resource('users', UserController::class);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

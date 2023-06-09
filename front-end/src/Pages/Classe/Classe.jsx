@@ -3,19 +3,21 @@ import { useState, useEffect } from 'react'
 import axios from "axios";
 import AddClassModal from './AddClassModal';
 import DepartementItem from './DepartementItem';
-
+import Spinner from '../../components/loading/Spinner';
 
 const Classe = () => {
 
-   const [classes, setClasses] = useState()
-   const [showAddModal, setShowAddModal] = useState(false)
-
-   const [search, setSearch] = useState('')
+  const [showAddModal, setShowAddModal] = useState(false)
+  
+  const [search, setSearch] = useState('')
+  const [classes, setClasses] = useState()
+  const [loading, setloading] = useState(true)
 
   useEffect(()=>{
     const getClasses = async ()=>{
       const { data } = await axios.get("http://127.0.0.1:8000/api/departments");
       setClasses(data)
+      setloading(false)
     }
 
     getClasses()
@@ -52,6 +54,8 @@ const Classe = () => {
     }
     
   };
+
+  if (loading) return <Spinner />; 
 
   return (
     <div>

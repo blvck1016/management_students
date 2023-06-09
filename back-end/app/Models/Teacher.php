@@ -9,9 +9,20 @@ class Teacher extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'email'
+    ];
+
+
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
     }
     
 }

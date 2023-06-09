@@ -1,11 +1,9 @@
 
-import { useCookies } from 'react-cookie';
 
 const Logout = () => {
-  const [cookies, setCookie, removeCookie]  = useCookies(['Token']);
 
   const logout = () => {
-    removeCookie('Token');
+
     window.location.href = '/';
     return false;
   };

@@ -9,9 +9,16 @@ class Semester extends Model
 {
     use HasFactory;
 
+    protected $with = ['major'];
+
     public function modules()
     {
         return $this->hasMany(Module::class);
+    }
+
+    public function major()
+    {
+        return $this->belongsTo(Major::class);
     }
 
 }

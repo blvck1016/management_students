@@ -20,12 +20,16 @@ import ProfilAdmin from "./Pages/admin/profilAdmin";
 import Login from "./Pages/Login/Login"
 import AdminIndex from "./Pages/admin/AdminIndex";
 
+import Home from "./Pages/home/Home";
+
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+
         <Route path="/admin" element={<AdminInterface />}>
           {/* classes */}
           <Route index element={<AdminIndex />} />
