@@ -1,8 +1,15 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import DashboardNav from "../../components/navbar/DashboardNav";
+import { useEffect } from "react";
 
 const AdminInterface = () => {
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+  },[])
 
   return (
     <>

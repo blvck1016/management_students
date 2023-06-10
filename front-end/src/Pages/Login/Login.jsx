@@ -16,19 +16,22 @@ function Login() {
       });
 
       localStorage.setItem("user", JSON.stringify(data.user));
- 
+      localStorage.setItem("token", JSON.stringify(data.token));
 
-      if (data.user.role === "admin") {
+      if (data.user.role_id === 1) {
         navigate("/admin");
-      } else if (data.user.role === "enseignant") {
-        navigate("/EnseignantInerface");
-      } else if (data.user.role === "eleve") {
-        navigate("/EleveInterface");
+      } else if (data.user.role_id === 2) {
+        navigate("/enseignant");
+      } else if (data.user.role === 3) {
+        navigate("/teacher");
       } else {
-        navigate("not role");
+        navigate("/");
       }
     } catch (error) {
-      console.error(error);
+      console.log(error)
+      alert('uncorrect email or password')
+      setEmail("")
+      setPassword("")
     }
   };
 

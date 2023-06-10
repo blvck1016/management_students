@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Module;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller
@@ -69,6 +70,23 @@ class ModuleController extends Controller
         $module->delete();
 
         return response()->json(['message' => 'Module deleted successfully']);
+    }
+
+
+    public function modulesByTeacher($id){
+
+        
+        $teacher = Teacher::with('user')->where('user_id', $id)->first();
+
+
+        if ($teacher) {
+            $module = $teacher->module;
+            $module->load('semester');
+            return $module;
+        } else {
+            // Handle the case where the teacher is not found
+            return response()->json(['message' => 'Teacher not found'], 404);
+        }
     }
 
 

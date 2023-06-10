@@ -22,6 +22,8 @@ import AdminIndex from "./Pages/admin/AdminIndex";
 
 import Home from "./Pages/home/Home";
 
+import EnseignantInerface  from "./Interfaces/enseignantInerface/EnseignantInerface"
+
 
 function App() {
   return (
@@ -55,6 +57,14 @@ function App() {
           {/* All admins */}
           <Route path="/admin/all" element={<AdminList />} />
         </Route>
+
+
+        {/* teacher Interface */}
+
+        <Route path="/enseignant" element={<EnseignantInerface />}>
+          {/* <Route index element={<EnseignantIndex/>}/> */}
+        </Route>
+
       </Routes>
     </BrowserRouter>
   );

@@ -2,52 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function index()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
     {
-        $Students = Student::with('major')->get();
-        // $role = $request->user()->role;
-        return $Students;
-        // return Classe::select('id','nom','niveau')->get();
+
+        return  Student::with('major')->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-
-
-        $request->validate([
-            'nom' => 'required',
-            'prenom' => 'required',
-            'date_de_naissance' => 'required',
-            'adresse' => 'required',
-            "telephone" => "required",
-            'classe_id' => 'required',
-            'user_id' => 'required',
+        // Validate the request data
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'major_id' => 'required|exists:majors,id',
         ]);
-        $e = new Student();
-        $e->nom = $request->nom;
-        $e->prenom = $request->prenom;
-        $e->date_de_naissance = $request->date_de_naissance;
-        $e->adresse = $request->adresse;
-        $e->telephone = $request->telephone;
-        $e->classe_id = $request->classe_id;
-        $e->user_id = $request->user_id;
-        $e->save();
-        return ["message" => "Student has been created succfully"];
+
+        // Create a new User
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt('password'), // Set a default password
+            'role_id' => 3, // Assuming role_id 2 represents the student role
+        ]);
+
+        // Create a new Teacher
+        $student = Student::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'major_id' => $validatedData['major_id'],
+            'user_id' => $user->id, // Assign the user_id to the created User's id
+        ]);
+
+        $student->load('major');
+        return $student;
     }
 
     /**
@@ -58,47 +55,40 @@ class StudentController extends Controller
         return Student::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // public function edit(Student $Student)
-    // {
-    //     //
-    // }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
-        $fields = $request->validate([
-            'nom' => 'required',
-            'prenom' => 'required',
-            'date_de_naissance' => 'required',
-            'adresse' => 'required',
-            "telephone" => "required",
-            'classe_id' => 'required',
-            'user_id' => 'required'
+        // $fields = $request->validate([
+        //     'nom' => 'required',
+        //     'prenom' => 'required',
+        //     'date_de_naissance' => 'required',
+        //     'adresse' => 'required',
+        //     "telephone" => "required",
+        //     'user_id' => 'required'
 
-        ]);
+        // ]);
 
-        $Student =  Student::find($id);
+        // $Teacher =  Teacher::find($id);
 
-        if (!$Student) {
-            return response()->json(["message" => "this Student doesn't exist"]);
-        } else {
-            $Student->update($fields);
-            return response()->json(["message" => "dtudent has been update succefully"]);
-        }
+        // if (!$Teacher) {
+        //     return response()->json(["message" => "this Teacher doesn't exist"]);
+        // } else {
+        //     $Teacher->update($fields);
+        //     return response()->json(["message" => "dtudent has been update succefully"]);
+        // }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
+
     public function destroy($id)
     {
-        $user = Student::find($id);
+
+        $student = Student::find($id);
+        $user_id  = $student->user_id;
+        $user = User::find($user_id);
+        $student->delete();
         $user->delete();
-        return ["message" => "Student " . $id . " has been deleted successfully"];
+
+        return ["message" => "Student has been deleted successfully"];
     }
 }

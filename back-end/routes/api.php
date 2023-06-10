@@ -10,6 +10,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DepartementController;
 
 /*
@@ -31,6 +32,8 @@ Route::resource('modules', ModuleController::class);
 Route::resource('students', StudentController::class);
 Route::resource('admins', AdminController::class);
 Route::resource('attendance', AttendanceController::class);
+Route::post('/login', [AuthController::class,'login']);
+Route::get('/teacher/modules/{id}', [ModuleController::class,'modulesByTeacher']);
 // Route::resource('users', UserController::class);
 
 
