@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Module;
 use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -91,4 +92,13 @@ class StudentController extends Controller
 
         return ["message" => "Student has been deleted successfully"];
     }
+
+
+    // public function studentsByMajor($id){
+
+    //     $students  = Student::where('major_id',$id)->get();
+    //     return $students;
+
+    // }
+   
 }

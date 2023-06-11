@@ -33,8 +33,11 @@ Route::resource('students', StudentController::class);
 Route::resource('admins', AdminController::class);
 Route::resource('attendance', AttendanceController::class);
 Route::post('/login', [AuthController::class,'login']);
+// modules by teacher id
 Route::get('/teacher/modules/{id}', [ModuleController::class,'modulesByTeacher']);
-// Route::resource('users', UserController::class);
+// students by a major id
+Route::get('/major/{id}/students',[MajorController::class,'studentsOfMajor']);
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -24,6 +24,12 @@ import Home from "./Pages/home/Home";
 
 import EnseignantInerface  from "./Interfaces/enseignantInerface/EnseignantInerface"
 
+import GetEleves from "./Interfaces/enseignantInerface/GetEleve"
+
+import EnseignantIndex from "./Interfaces/enseignantInerface/EnseignantIndex"
+
+import Absences from "./Interfaces/enseignantInerface/Absences";
+
 
 function App() {
   return (
@@ -58,13 +64,16 @@ function App() {
           <Route path="/admin/all" element={<AdminList />} />
         </Route>
 
-
         {/* teacher Interface */}
 
         <Route path="/enseignant" element={<EnseignantInerface />}>
-          {/* <Route index element={<EnseignantIndex/>}/> */}
+          <Route index element={<EnseignantIndex />} />
+          <Route
+            path="/enseignant/modules/:id/students"
+            element={<GetEleves />}
+          />
+          <Route path="/enseignant/mark-absences" element={<Absences />} />
         </Route>
-
       </Routes>
     </BrowserRouter>
   );
