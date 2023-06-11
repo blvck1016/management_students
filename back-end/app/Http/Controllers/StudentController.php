@@ -53,7 +53,11 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        return Student::find($id);
+        $student =  Student::where('user_id',$id)->get();
+        if($student){
+            $student->load('major');
+            return $student;
+        }
     }
 
 

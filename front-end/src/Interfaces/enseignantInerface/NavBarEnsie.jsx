@@ -1,6 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavBarEnsie = () => {
+
+  const navigate = useNavigate()
+
+  const logout = () =>{
+    localStorage.removeItem('teacher')
+    localStorage.removeItem('teacher_token')
+    navigate('/')
+  }
+
   return (
     <div>
       <nav className="bg-gray-800">
@@ -11,7 +20,7 @@ const NavBarEnsie = () => {
                 to="/enseignant"
                 className="flex-shrink-0 text-white font-bold"
               >
-                Teacher
+                Enseignant
               </Link>
             </div>
             <div className="flex">
@@ -21,19 +30,19 @@ const NavBarEnsie = () => {
               >
                 Absences
               </Link>
-              <a
-                href="/EnseiProfile"
+              <Link
+                to="/enseignant/profile"
                 className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Profile
-              </a>
+              </Link>
 
-              <a
-                href="/Logout"
+              <button
+                onClick={()=>logout()}
                 className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
               >
                 logout
-              </a>
+              </button>
             </div>
           </div>
         </div>

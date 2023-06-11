@@ -1,8 +1,18 @@
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import NavBarEnsie from "./NavBarEnsie";
 
 const EnseignantInerface = () => {
+
+  const navigate = useNavigate()
+
+
+  useEffect(() => {
+    if (!localStorage.getItem("teacher_token")) {
+      navigate("/login");
+    }
+  }, []);
 
 
 

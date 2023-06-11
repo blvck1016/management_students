@@ -15,15 +15,18 @@ function Login() {
         password,
       });
 
-      localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", JSON.stringify(data.token));
-
       if (data.user.role_id === 1) {
+        localStorage.setItem("admin", JSON.stringify(data.user));
+        localStorage.setItem("admin_token", JSON.stringify(data.token));
         navigate("/admin");
       } else if (data.user.role_id === 2) {
+        localStorage.setItem("teacher", JSON.stringify(data.user));
+        localStorage.setItem("teacher_token", JSON.stringify(data.token));
         navigate("/enseignant");
-      } else if (data.user.role === 3) {
-        navigate("/teacher");
+      } else if (data.user.role_id === 3) {
+        localStorage.setItem("student", JSON.stringify(data.user));
+        localStorage.setItem("student_token", JSON.stringify(data.token));
+        navigate("/etudiant");
       } else {
         navigate("/");
       }

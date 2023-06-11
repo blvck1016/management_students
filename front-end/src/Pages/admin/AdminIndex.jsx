@@ -2,13 +2,13 @@
 
 const AdminIndex = () => {
    // Example data (replace with your actual data)
-   const studentCount = 100;
-   const teacherCount = 20;
-   const moduleCount = 50;
+   const studentCount = 50;
+   const teacherCount = 10;
+   const moduleCount = 10;
    const departmentCount = 5;
    const totalUsers = studentCount + teacherCount;
 
-   const user = JSON.parse(localStorage.getItem("user"));
+   const user = JSON.parse(localStorage.getItem("admin"));
 
     return (
       <>

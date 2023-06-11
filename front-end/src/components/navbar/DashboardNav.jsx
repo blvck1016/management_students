@@ -5,8 +5,8 @@ function DashboardNav() {
   const navigate = useNavigate();
 
   const logout  = () =>{
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
+    localStorage.removeItem('admin_token')
+    localStorage.removeItem('admin')
     navigate('/')
   }
 

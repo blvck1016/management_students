@@ -37,6 +37,8 @@ Route::post('/login', [AuthController::class,'login']);
 Route::get('/teacher/modules/{id}', [ModuleController::class,'modulesByTeacher']);
 // students by a major id
 Route::get('/major/{id}/students',[MajorController::class,'studentsOfMajor']);
+// absences of a student
+Route::get('/absences/student/{id}', [AttendanceController::class, 'absenceOfStudent']);
 
 
 

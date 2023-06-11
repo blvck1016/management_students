@@ -1,6 +1,8 @@
 import "./App.css";
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+
+// admin 
 import AddEleve from "./Pages/Eleve/AddEleve";
 import EditEleve from "./Pages/Eleve/EditEleve";
 import Enseignant from "./Pages/Enseignant/Enseignant";
@@ -16,11 +18,15 @@ import Classe from "./Pages/Classe/Classe";
 import AdminList from "./Pages/admin/AdminList";
 import Eleve from "./Pages/Eleve/Eleve";
 import ProfilAdmin from "./Pages/admin/profilAdmin";
-
-import Login from "./Pages/Login/Login"
 import AdminIndex from "./Pages/admin/AdminIndex";
 
+// home 
+
+import Login from "./Pages/Login/Login"
+
 import Home from "./Pages/home/Home";
+
+// teacher
 
 import EnseignantInerface  from "./Interfaces/enseignantInerface/EnseignantInerface"
 
@@ -29,6 +35,15 @@ import GetEleves from "./Interfaces/enseignantInerface/GetEleve"
 import EnseignantIndex from "./Interfaces/enseignantInerface/EnseignantIndex"
 
 import Absences from "./Interfaces/enseignantInerface/Absences";
+
+import EnseiProfile from "./Interfaces/enseignantInerface/EnseiProfile";
+
+// student
+
+import EleveInterface from "./Interfaces/eleveInterface/EleveInterface";
+
+import EleveIndex from "./Interfaces/eleveInterface/EleveIndex";
+import EleveAbsence from "./Interfaces/eleveInterface/EleveAbsence";
 
 
 function App() {
@@ -73,6 +88,13 @@ function App() {
             element={<GetEleves />}
           />
           <Route path="/enseignant/mark-absences" element={<Absences />} />
+          <Route path="/enseignant/profile" element={<EnseiProfile />} />
+        </Route>
+
+        {/* student interface */}
+        <Route path="/etudiant" element={<EleveInterface />}>
+          <Route index element={<EleveIndex />} />
+          <Route path="/etudiant/absences" element={<EleveAbsence />} />
         </Route>
       </Routes>
     </BrowserRouter>

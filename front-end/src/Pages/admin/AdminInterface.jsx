@@ -6,7 +6,7 @@ const AdminInterface = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("admin_token")) {
       navigate("/login");
     }
   },[])

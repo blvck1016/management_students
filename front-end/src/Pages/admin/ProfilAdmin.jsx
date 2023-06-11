@@ -1,7 +1,11 @@
+
+
 const ProfilAdmin = () => {
 
 
-  const user = localStorage.getItem("user");
+  const user = JSON.parse(localStorage.getItem("admin"));
+
+  // console.log(user)
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -9,10 +13,10 @@ const ProfilAdmin = () => {
         <h2 className="text-2xl font-semibold mb-4">Vos informations:</h2>
         <div className="text-gray-600">
           <p className="mb-2">
-            <span className="font-semibold">Nom:</span> {user?.name}
+            <span className="font-semibold">Nom :</span> {user.name}
           </p>
           <p className="mb-2">
-            <span className="font-semibold">Email:</span> {user?.email}
+            <span className="font-semibold">Email :</span> {user.email}
           </p>
         </div>
       </div>

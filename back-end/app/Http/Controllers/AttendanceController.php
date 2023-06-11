@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -32,6 +33,15 @@ class AttendanceController extends Controller
         $attendance->load('student','module');
 
         return $attendance;
+    }
+
+
+    public function absenceOfStudent($id) {
+        $student = Student::where('user_id',$id)->first();
+        if($student){
+            $abs = Attendance::where('student_id',$student->id)->get();
+            return $abs;
+        }
     }
 
 

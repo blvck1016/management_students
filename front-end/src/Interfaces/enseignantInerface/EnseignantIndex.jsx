@@ -7,7 +7,7 @@ const EnseignantIndex = () => {
       const [module, setModule] = useState({});
       const [loading, setloading] = useState(true);
 
-      const user = JSON.parse(localStorage.getItem("user"));
+      const user = JSON.parse(localStorage.getItem("teacher"));
 
       // console.log(user.id)
 
