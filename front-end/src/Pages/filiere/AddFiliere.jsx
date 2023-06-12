@@ -1,26 +1,22 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react"
+import { useState } from "react";
 
-const AddMatiere = ({
+const Addfiliere = ({
   showAddModal,
   setShowAddModal,
   addModule,
-  semsteres,
+  departements,
 }) => {
-
-  
   const [nom, setNom] = useState("");
 
   const [semesterId, setsemesterId] = useState("");
 
-
-
-  // console.log(semsteres);
+  // console.log(departements);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (nom && semesterId) {
-      const payload = { name: nom, semester_id: semesterId };
+      const payload = { name: nom, department_id : semesterId };
       addModule(payload);
       setNom("")
       setsemesterId("")
@@ -37,7 +33,7 @@ const AddMatiere = ({
         <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
           <div className="px-6 py-4">
             <h2 className="text-lg font-medium text-gray-800 mb-2">
-              Add module
+              Add filiere
             </h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
@@ -45,7 +41,7 @@ const AddMatiere = ({
                   htmlFor="nom"
                   className="block text-gray-700 font-medium mb-2"
                 >
-                  Nom de module
+                  Nom de filere
                 </label>
                 <input
                   type="text"
@@ -61,14 +57,14 @@ const AddMatiere = ({
                   htmlFor="nom"
                   className="block text-gray-700 font-medium mb-2"
                 >
-                  Semestre
+                  Departement
                 </label>
                 <select
                   className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
                   onChange={(e) => setsemesterId(e.target.value)}
                 >
                   <option value="">Choose semester</option>
-                  {semsteres?.map((s) => (
+                  {departements?.map((s) => (
                     <option key={s.id} value={s.id} className="py-2">
                       {s.name}
                     </option>
@@ -99,4 +95,4 @@ const AddMatiere = ({
   );
 };
 
-export default AddMatiere
+export default Addfiliere;

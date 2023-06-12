@@ -48,22 +48,22 @@ const Home = () => {
       <section className="bg-gray-100 py-12 px-4">
         <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {/* Admin Card */}
-          <div className="bg-white rounded-lg shadow-md p-6 transition duration-300 hover:bg-gray-200">
+          <Link to="/admin" className="bg-white rounded-lg shadow-md p-6 transition duration-300 hover:bg-gray-200">
             <h2 className="text-xl font-semibold">Admin</h2>
             <p className="text-gray-600 mt-2">Manage the school system</p>
-          </div>
+          </Link>
 
           {/* Teacher Card */}
-          <div className="bg-white rounded-lg shadow-md p-6 transition duration-300 hover:bg-gray-200">
+          <Link to="/enseignant" className="bg-white rounded-lg shadow-md p-6 transition duration-300 hover:bg-gray-200">
             <h2 className="text-xl font-semibold">Teacher</h2>
             <p className="text-gray-600 mt-2">Teach and engage with students</p>
-          </div>
+          </Link>
 
           {/* Student Card */}
-          <div className="bg-white rounded-lg shadow-md p-6 transition duration-300 hover:bg-gray-200">
+          <Link to="/etudiant" className="bg-white rounded-lg shadow-md p-6 transition duration-300 hover:bg-gray-200">
             <h2 className="text-xl font-semibold">Student</h2>
             <p className="text-gray-600 mt-2">Learn and grow academically</p>
-          </div>
+          </Link>
         </div>
       </section>
 

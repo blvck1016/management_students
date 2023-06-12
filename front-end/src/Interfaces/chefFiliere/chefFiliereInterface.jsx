@@ -1,19 +1,19 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import DashboardNav from "../../components/navbar/DashboardNav";
+import MajorMangerNav from "../../components/navbar/MajorMangerNav";
 import { useEffect } from "react";
 
-const AdminInterface = () => {
+const ChefFiliereInterface = () => {
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if (!localStorage.getItem("admin_token")) {
+  useEffect(() => {
+    if (!JSON.parse(localStorage.getItem("major_manager_token"))) {
       navigate("/login");
     }
-  },[])
+  }, []);
 
   return (
     <>
-      <DashboardNav />
+      <MajorMangerNav />
 
       <div className="h-screen max-w-full bg-black">
         <div className="flex h-full">
@@ -21,39 +21,21 @@ const AdminInterface = () => {
             <ul className="text-white text-center mt-5">
               <li
                 className="transition-all duration-200 rounded-md py-4 text-bold cursor-pointer hover:bg-gray-700"
-                onClick={() => navigate("/admin/classes")}
-              >
-                Departements
-              </li>
-              <li
-                className="transition-all duration-200 rounded-md py-4 text-bold cursor-pointer hover:bg-gray-700"
-                onClick={() => navigate("/admin/majors")}
+                onClick={() => navigate("/chef-de-filiere/majors")}
               >
                 Majors
               </li>
               <li
                 className="transition-all duration-200 rounded-md py-4 text-bold cursor-pointer  hover:bg-gray-700"
-                onClick={() => navigate("/admin/matiere")}
+                onClick={() => navigate("/chef-de-filiere/matiere")}
               >
                 Modules
               </li>
               <li
                 className="transition-all duration-200 rounded-md py-4 text-bold cursor-pointer hover:bg-gray-700"
-                onClick={() => navigate("/admin/enseignant")}
+                onClick={() => navigate("/chef-de-filiere/enseignant")}
               >
                 Enseignants
-              </li>
-              <li
-                className="transition-all duration-200 rounded-md py-4 text-bold cursor-pointer hover:bg-gray-700"
-                onClick={() => navigate("/admin/eleves")}
-              >
-                Eleves
-              </li>
-              <li
-                className="transition-all duration-200 rounded-md py-4 text-bold cursor-pointer hover:bg-gray-700"
-                onClick={() => navigate("/admin/all")}
-              >
-                Admins
               </li>
             </ul>
           </div>
@@ -66,4 +48,4 @@ const AdminInterface = () => {
   );
 };
 
-export default AdminInterface;
+export default ChefFiliereInterface;

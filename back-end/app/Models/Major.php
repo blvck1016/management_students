@@ -13,6 +13,8 @@ class Major extends Model
 
     protected $with = ['department'];
 
+    protected $fillable = ['name', 'department_id'];
+
     public function department(){
         return $this->belongsTo(Department::class);
     }

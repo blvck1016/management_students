@@ -39,7 +39,7 @@ const EnseignantIndex = () => {
     return (
         <div className="container mx-auto py-10">
         <h1 className="text-3xl font-bold text-center mb-6">
-            Hello, Professor <span className="text-green-500">{user.name}</span>
+            Hello, Professor <span className="text-green-500">{user?.name}</span>
         </h1>
 
         <div className="mt-8">
