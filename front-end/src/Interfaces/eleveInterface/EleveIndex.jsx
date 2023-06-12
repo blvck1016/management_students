@@ -40,7 +40,7 @@ const EleveIndex = () => {
             <span className="font-semibold">{student[0].major.name}</span>
           </p>
           <p className="mb-2">
-            Semestre :{" "}
+            Departement :{" "}
             <span className="font-semibold">
               {student[0].major.department.name}
             </span>

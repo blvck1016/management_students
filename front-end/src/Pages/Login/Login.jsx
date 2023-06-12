@@ -22,11 +22,19 @@ function Login() {
       } else if (data.user.role_id === 2) {
         localStorage.setItem("teacher", JSON.stringify(data.user));
         localStorage.setItem("teacher_token", JSON.stringify(data.token));
-        navigate("/enseignant");
+        if(password === 'password'){
+          navigate("/enseignant-update-password");
+        }else{
+          navigate("/enseignant");
+        }
       } else if (data.user.role_id === 3) {
         localStorage.setItem("student", JSON.stringify(data.user));
         localStorage.setItem("student_token", JSON.stringify(data.token));
-        navigate("/etudiant");
+         if (password === "password") {
+           navigate("/etudiant-update-password");
+         } else {
+           navigate("/etudiant");
+         }
       } else if(data.user.role_id === 4) {
          localStorage.setItem(
            "major_departement",
@@ -36,11 +44,19 @@ function Login() {
            "major_departement_token",
            JSON.stringify(data.token)
          );
-         navigate("/chef-de-departement");
+          if (password === "password") {
+            navigate("/chef-departement-update-password");
+          } else {
+            navigate("/chef-de-departement");
+          }
       }else if(data.user.role_id === 5){
         localStorage.setItem("major_manager", JSON.stringify(data.user));
         localStorage.setItem("major_manager_token", JSON.stringify(data.token));
-        navigate('/chef-de-filiere')
+         if (password === "password") {
+           navigate("/chef-filiere-update-password");
+         } else {
+           navigate("/chef-de-filiere");
+         }
       }else{
         navigate('/')
       }

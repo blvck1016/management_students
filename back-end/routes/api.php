@@ -39,6 +39,8 @@ Route::get('/teacher/modules/{id}', [ModuleController::class,'modulesByTeacher']
 Route::get('/major/{id}/students',[MajorController::class,'studentsOfMajor']);
 // absences of a student
 Route::get('/absences/student/{id}', [AttendanceController::class, 'absenceOfStudent']);
+// update password
+Route::post('/update-password/{id}',[AuthController::class, 'updatePassword']);
 
 
 

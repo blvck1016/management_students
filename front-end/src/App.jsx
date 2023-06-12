@@ -49,6 +49,13 @@ import CheffiliereIndex from "./Interfaces/chefFiliere/cheffiliereIndex";
 import ChefDeartementInterface from "./Interfaces/chefDepartement/ChefDepartementInterface"
 import ChefDepartementIndex from "./Interfaces/chefDepartement/ChefDepartementIndex"
 
+// Update password page
+
+import UpdateChefDepartementPassword from "./Pages/updatepwd/UpdateChefDepartementPassword";
+import UpdateChefFilerePassword from "./Pages/updatepwd/UpdateChefFilerePassword";
+import UpdateStudentPassword from "./Pages/updatepwd/UpdateStudentPassword";
+import UpdateTeacherPassword from "./Pages/updatepwd/updateTeacherPassword";
+
 
 function App() {
   return (
@@ -121,7 +128,23 @@ function App() {
             element={<Enseignant />}
           />
         </Route>
-        {/*  */}
+        {/* Update password routes */}
+        <Route
+          path="/etudiant-update-password"
+          element={<UpdateStudentPassword />}
+        />
+        <Route
+          path="/enseignant-update-password"
+          element={<UpdateTeacherPassword />}
+        />
+        <Route
+          path="/chef-departement-update-password"
+          element={<UpdateChefDepartementPassword />}
+        />
+        <Route
+          path="/chef-filiere-update-password"
+          element={<UpdateChefFilerePassword />}
+        />
       </Routes>
     </BrowserRouter>
   );

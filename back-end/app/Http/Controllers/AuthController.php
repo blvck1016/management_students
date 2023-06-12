@@ -34,7 +34,7 @@ class AuthController extends Controller
         $user = User::where('email', $fields['email'])->first();
 
         // Check password
-        if (!$user) {
+        if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
                 'message' => 'email or password is uncorrect        '
             ], 401);
@@ -75,5 +75,25 @@ class AuthController extends Controller
             'message' => 'Logged out'
         ];
     }
+
+    public function updatePassword(Request $request, $id)
+    {
+        // Validate the request data
+        $request->validate([
+            'password' => 'required|min:8',
+        ]);
+
+
+        // Find the user by ID
+        $user = User::findOrFail($id);
+
+        // Update the user's password
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return $user;
+    
+    }
+
 
 }
