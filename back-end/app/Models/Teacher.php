@@ -32,5 +32,7 @@ class Teacher extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    
     
 }

@@ -29,7 +29,7 @@ const AdminInterface = () => {
                 className="transition-all duration-200 rounded-md py-4 text-bold cursor-pointer hover:bg-gray-700"
                 onClick={() => navigate("/admin/majors")}
               >
-                Majors
+                Filieres
               </li>
               <li
                 className="transition-all duration-200 rounded-md py-4 text-bold cursor-pointer  hover:bg-gray-700"

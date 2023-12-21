@@ -28,4 +28,8 @@ class Major extends Model
     {
         return $this->hasMany(Semester::class);
     }
+
+    // filiere belongs to departement
+    // filiere 3ndo bzaf d talamid
+    // filiere 3ndo bzaf d les semestres goood
 }

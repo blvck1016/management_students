@@ -24,4 +24,9 @@ class Module extends Model
     {
         return $this->hasMany(Teacher::class);
     }
+
+    // hadi li knt swlt fiha
+    // module kikono 3ndo bzaf dyal asasida 
+    // module belongs to semestre 
+    // mzyana ! ahhh
 }

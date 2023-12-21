@@ -15,13 +15,13 @@ class MajorSeeder extends Seeder
     {
         //
         Major::create([
-            'name' => 'Major 1',
+            'name' => 'CLE',
             'department_id' => 1,
         ]);
 
         Major::create([
-            'name' => 'Major 2',
-            'department_id' => 2,
+            'name' => 'TMW',
+            'department_id' => 1,
         ]);
     }
 }

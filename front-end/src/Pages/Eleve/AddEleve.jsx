@@ -47,7 +47,7 @@ const AddEleve = ({
         <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
           <div className="px-6 py-4">
             <h2 className="text-lg font-medium text-gray-800 mb-2">
-              Add Class
+              Ajouter Eleve
             </h2>
             <form onSubmit={addEleve}>
               <div className="mb-4">
@@ -88,13 +88,13 @@ const AddEleve = ({
                   htmlFor="nom"
                   className="block text-gray-700 font-medium mb-2"
                 >
-                  Major
+                  Filiere
                 </label>
                 <select
                   className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
                   onChange={(e) => setmajorId(e.target.value)}
                 >
-                  <option value="">Choose major</option>
+                  <option value="">Choose Filiere</option>
                   {majors?.map((s) => (
                     <option key={s.id} value={s.id} className="py-2">
                       {s.name}

@@ -17,4 +17,6 @@ class Department extends Model
     {
         return $this->hasMany(Teacher::class);
     }
+
+    // hna department 3ndha bzaf dyal asasida ! mzyana ? ouiiii
 }

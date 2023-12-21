@@ -23,4 +23,7 @@ class Student extends Model
     {
         return $this->belongsTo(Major::class);
     }
+
+    // hna student belongs to filiere ah filiere whda o semstre wahd hta houwa
+    // fhad relationship kayn ghir filiere wahda makynch semestre
 }

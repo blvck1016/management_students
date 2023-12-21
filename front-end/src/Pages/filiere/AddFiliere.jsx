@@ -63,7 +63,7 @@ const Addfiliere = ({
                   className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
                   onChange={(e) => setsemesterId(e.target.value)}
                 >
-                  <option value="">Choose semester</option>
+                  <option value="">Choose filiere</option>
                   {departements?.map((s) => (
                     <option key={s.id} value={s.id} className="py-2">
                       {s.name}

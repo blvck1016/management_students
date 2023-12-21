@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 const EleveAbsence = () => {
 
+  const user = JSON.parse(localStorage.getItem('student'))
+
   const [absences, setAbsences] = useState([]);
   const [loading, setloading] = useState(true)
 
@@ -11,12 +13,12 @@ const EleveAbsence = () => {
   useEffect(() => {
     // Fetch student absences data from API
     const fetchAbsences = async () => {
-      // const { data } = await axios.get(
-      //   `http://127.0.0.1:8000/api/absences/student/${user.id}`
-      // );
        const { data } = await axios.get(
-         `http://127.0.0.1:8000/api/students`
+         `http://127.0.0.1:8000/api/absences/student/${user.id}`
        );
+     //  const { data } = await axios.get(
+      //   `http://127.0.0.1:8000/api/students`
+     //  );
       // console.log(data);
       setAbsences(data)
       setloading(false)
@@ -43,7 +45,7 @@ const EleveAbsence = () => {
               {absences?.map((absence) => (
                 <tr key={absence.id}>
                   <td className="py-2 px-4 border-b text-center">{absence.module.name}</td>
-                  <td className="py-2 px-4 border-b text-center">{absence.date}</td>
+                  <td className="py-2 px-4 border-b text-center">{absence?.date}</td>
                 </tr>
               ))}
             </tbody>

@@ -36,8 +36,9 @@ class SemesterSeeder extends Seeder
             ],
             [
                 'name' => 'S6',
-                'major_id' => 2,
+                'major_id' => 1,
             ],
+            
             // Add more semesters as needed
         ];
 
